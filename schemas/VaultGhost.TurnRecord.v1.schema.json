@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VaultGhost Turn Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "version", "data", "signature"],
+  "properties": {
+    "type": { "type": "string", "const": "TurnRecord" },
+    "version": { "type": "string" },
+    "data": { "type": "object" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["alg", "pubkey", "sig"],
+      "properties": {
+        "alg": { "type": "string", "enum": ["Ed25519"] },
+        "pubkey": { "type": "string", "pattern": "^[A-Za-z0-9+/=]+$" },
+        "sig": { "type": "string", "pattern": "^[A-Za-z0-9+/=]+$" },
+        "signed_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}
