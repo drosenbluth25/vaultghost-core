@@ -30,9 +30,11 @@ def turn_verify(args):
     from .canonical import canonicalize_jcs
     with open(args.in_file) as f:
         turn = json.load(f)
-    sig_obj = turn.pop("signature")
-    # Re-canonicalize without signature
-    canonical_bytes = canonicalize_jcs(turn)
+    # Fix 3 (Code Review Report, April 24, 2026): do not pop signature in-place.
+    # Use a copy-based approach so the loaded dict is never mutated.
+    sig_obj = turn.get("signature")
+    turn_for_verify = {k: v for k, v in turn.items() if k != "signature"}
+    canonical_bytes = canonicalize_jcs(turn_for_verify)
     sig_bytes = base64.b64decode(sig_obj["sig"])
     if args.pubkey:
         pub = load_public_key(args.pubkey)
