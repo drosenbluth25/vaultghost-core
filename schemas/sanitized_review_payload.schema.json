@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sanitized Review Payload",
+  "description": "Schema for a sanitized payload for review, removing sensitive information.",
+  "type": "object",
+  "required": [
+    "agent_id",
+    "run_id",
+    "review_timestamp",
+    "sanitized_input_summary",
+    "sanitized_output_summary",
+    "validation_results"
+  ],
+  "properties": {
+    "agent_id": {
+      "type": "string",
+      "description": "Unique identifier for the agent."
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique identifier for the specific agent run."
+    },
+    "review_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the review payload was generated."
+    },
+    "sanitized_input_summary": {
+      "type": "string",
+      "description": "Summary of the sanitized input data."
+    },
+    "sanitized_output_summary": {
+      "type": "string",
+      "description": "Summary of the sanitized output data."
+    },
+    "validation_results": {
+      "type": "array",
+      "items": {
+        "$ref": "validation_result.schema.json"
+      },
+      "description": "Results of various validation checks."
+    },
+    "policy_violations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of policy violations detected."
+    },
+    "legal_escalation_required": {
+      "type": "boolean",
+      "description": "Indicates if legal escalation is required."
+    }
+  }
+}
