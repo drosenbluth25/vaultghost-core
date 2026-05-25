@@ -1,0 +1,132 @@
+{
+  "schema_name": "vaultghost.proof_or_quarantine_event",
+  "schema_version": "0.1.0",
+  "event_id": "018f0000-0000-7000-8000-000000000001",
+  "created_at": "2026-05-25T00:00:00Z",
+  "verifier": {
+    "verifier_id": "proof-or-quarantine-demo",
+    "verifier_version": "0.1.0",
+    "verification_method": "threshold_classification_only",
+    "execution_mode": "browser_demo"
+  },
+  "classification_ruleset": {
+    "ruleset_id": "proof-or-quarantine-classification-rules",
+    "ruleset_version": "0.1-draft",
+    "ruleset_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "input": {
+    "prompt_disclosure": "raw",
+    "prompt_text": "Review this PR for merge readiness.",
+    "prompt_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "source_context_refs": []
+  },
+  "model_output": {
+    "raw_answer": "PR #8 is safe to merge. All tests pass, the Unicode issue is fixed, and the maintainer clearly resolved the problem in good faith.",
+    "surviving_answer": "PR #8 may be closer to merge readiness, but the available evidence is insufficient to verify test status, Unicode cleanup, or maintainer intent.",
+    "answer_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "model_name": "unspecified",
+    "model_provider": "unspecified"
+  },
+  "claims": [
+    {
+      "claim_id": "claim-001",
+      "claim_text": "PR #8 is safe to merge.",
+      "claim_type": "conclusion",
+      "confidence": 0.86,
+      "claim_bucket": "quarantined",
+      "evidence_status": "none_provided",
+      "evidence": [],
+      "rationale": "Merge safety is a conclusion dependent on tests, diff review, branch protection, and artifact inspection. No direct evidence was supplied.",
+      "risk_flags": ["ambiguous_scope"],
+      "required_upgrade_for_verification": "Provide CI status, reviewed diff, branch protection state, and exact commit SHA."
+    },
+    {
+      "claim_id": "claim-002",
+      "claim_text": "All tests pass.",
+      "claim_type": "technical",
+      "confidence": 0.94,
+      "claim_bucket": "quarantined",
+      "evidence_status": "none_provided",
+      "evidence": [],
+      "rationale": "High-confidence technical claim with no CI log, command output, or test artifact.",
+      "risk_flags": ["unsupported_factual_claim"],
+      "required_upgrade_for_verification": "Provide full test command, environment, exit code, and hashed output log."
+    },
+    {
+      "claim_id": "claim-003",
+      "claim_text": "The Unicode issue is fixed.",
+      "claim_type": "technical",
+      "confidence": 0.78,
+      "claim_bucket": "quarantined",
+      "evidence_status": "self_reported_pointer_only",
+      "evidence": [
+        {
+          "evidence_id": "ev-001",
+          "evidence_type": "file_view",
+          "evidence_pointer": "GitHub file view",
+          "evidence_quality": "weak",
+          "resolver_status": "not_attempted",
+          "resolver_notes": "File view is insufficient for byte-level Unicode verification."
+        }
+      ],
+      "rationale": "A UI file view may suggest a cleanup but cannot prove absence of hidden or bidirectional Unicode.",
+      "risk_flags": ["weak_evidence_type", "technical_claim_requires_byte_level_check"],
+      "required_upgrade_for_verification": "Run byte-level Unicode inspection on the raw file blob at the PR head commit."
+    },
+    {
+      "claim_id": "claim-004",
+      "claim_text": "The maintainer resolved the problem in good faith.",
+      "claim_type": "intent",
+      "confidence": 0.71,
+      "claim_bucket": "quarantined",
+      "evidence_status": "none_provided",
+      "evidence": [],
+      "rationale": "Intent claim is not operationally necessary and is not supported by direct evidence.",
+      "risk_flags": ["intent_claim"],
+      "required_upgrade_for_verification": "Avoid intent claims unless supported by explicit statements or documented behavior; even then, frame cautiously."
+    },
+    {
+      "claim_id": "claim-005",
+      "claim_text": "The file contains no hidden Unicode.",
+      "claim_type": "technical",
+      "confidence": 0.81,
+      "claim_bucket": "quarantined",
+      "evidence_status": "self_reported_pointer_only",
+      "evidence": [
+        {
+          "evidence_id": "ev-002",
+          "evidence_type": "visual_ui",
+          "evidence_pointer": "visual inspection",
+          "evidence_quality": "weak",
+          "resolver_status": "not_attempted",
+          "resolver_notes": "Visual inspection cannot prove absence of hidden Unicode."
+        }
+      ],
+      "rationale": "A byte-level property cannot be verified through visual inspection.",
+      "risk_flags": ["weak_evidence_type", "technical_claim_requires_byte_level_check"],
+      "required_upgrade_for_verification": "Inspect raw bytes and Unicode codepoints from the exact file blob."
+    }
+  ],
+  "classification_summary": {
+    "total_claims": 5,
+    "verified_count": 0,
+    "provisionally_verified_count": 0,
+    "inferred_count": 0,
+    "quarantined_count": 5
+  },
+  "canonicalization": {
+    "method": "RFC8785_JCS",
+    "hash_algorithm": "SHA-256",
+    "hash_excludes": ["event_integrity.event_hash"]
+  },
+  "event_integrity": {
+    "event_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "hash_scope": "event_without_event_hash"
+  },
+  "limitations": [
+    "evidence pointers not dereferenced",
+    "no external artifact hashing",
+    "no independent replay",
+    "browser demo classification only"
+  ]
+}
