@@ -1,4 +1,4 @@
-rfc8785==1.0.0
+rfc8785==0.1.4
 jsonschema>=4.20
 pytest>=8.0
 cryptography>=42.0.0
