@@ -73,6 +73,38 @@
       ],
       "upgrade_condition": "Attach actual USPTO filing receipt PDF to evidence/primary_artifacts/patent/ to upgrade to primary_artifact.",
       "notes": "Reference appears in public GitHub release notes. Receipt not yet attached to this packet."
+    },
+    {
+      "artifact_id": "VG-ART-004",
+      "artifact_type": "github_actions_hardgate_run",
+      "title": "CPAT Phase 1 Hard Gate — GitHub Actions run 27804855726",
+      "run_id": 27804855726,
+      "job_id": 82282652062,
+      "run_commit_sha": "5e145c15a139839447b3941c5ad23719a58abd54",
+      "source_class": "primary_artifact",
+      "verification_status": "passed_with_preserved_ci_evidence",
+      "artifact_id_external": 7741542848,
+      "artifact_digest": "sha256:a8d75859a8dd50de0e7bf083d0071643a533c5b94de475d747c767917b6c9ea7",
+      "observed_facts": [
+        "github_actions_job_conclusion_success",
+        "dependency_install_exit_code_0",
+        "pytest_exit_code_0",
+        "pytest_result_8_passed_0_failed",
+        "pytest_log_sha256_54d62a0149f447ee2867b9e102287fade45e0a057ff3b969489678c98884e9ae"
+      ],
+      "allowed_uses": [
+        "proves_cpat_phase1_hardgate_passed_within_bounded_ci_environment",
+        "supports_reproducibility_report",
+        "supports_status_PROVEN_WITHIN_CI_EVIDENCE"
+      ],
+      "disallowed_uses": [
+        "proves_independent_external_validation",
+        "proves_production_readiness",
+        "proves_security_assurance",
+        "proves_patentability",
+        "proves_market_adoption"
+      ],
+      "notes": "This is bounded CI evidence from a GitHub Actions hosted runner. It proves this test command passed under the recorded environment only."
     }
   ]
 }
