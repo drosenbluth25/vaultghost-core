@@ -65,6 +65,26 @@
         "proves the protocol is complete",
         "proves the protocol is production-ready"
       ]
+    },
+    {
+      "claim_id": "VG-CLAIM-005",
+      "claim_text": "CPAT Phase 1 hard-gate run passed in GitHub Actions with 8 tests passing and 0 failures.",
+      "evidence_basis": [
+        "VG-ART-004",
+        "CPAT_RUN_27804855726_SUCCESS_SUMMARY.md",
+        "VAULTGHOST_REPRODUCIBILITY_REPORT.md"
+      ],
+      "evidence_tier": "primary_ci_artifact",
+      "propagation_status": "allowed_with_ci_scope_limit",
+      "safe_wording": "CPAT Phase 1 passed within bounded GitHub Actions CI evidence: run 27804855726, commit 5e145c15a139839447b3941c5ad23719a58abd54, command `pytest -q`, 8 passing tests, 0 failures, preserved log hash 54d62a0149f447ee2867b9e102287fade45e0a057ff3b969489678c98884e9ae.",
+      "unsafe_wording": [
+        "independently validated",
+        "externally certified",
+        "security audited",
+        "production ready",
+        "patent validated",
+        "market proven"
+      ]
     }
   ]
 }
