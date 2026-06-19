@@ -1,0 +1,14 @@
+{
+  "phase": "CPAT_Phase_1",
+  "status": "UNRESOLVED",
+  "status_set_utc": "2026-06-18T23:47:00Z",
+  "reason": "Hard-gate test run not yet executed and preserved.",
+  "upgrade_condition": "Run the hard-gate command sequence in COMMIT_INSTRUCTIONS.md, preserve all logs and hashes, fill VAULTGHOST_REPRODUCIBILITY_REPORT.md with actual values, commit to repo.",
+  "upgrade_status": "PROVEN_WITHIN_LOCAL_EVIDENCE",
+  "upgrade_scope": "local machine, specific commit, specific environment, specific test command",
+  "patent_deadline": {
+    "target_date": "2027-02-25",
+    "action_required": "Non-provisional or PCT filing",
+    "restoration_reliance": "FORBIDDEN — treat deadline as hard"
+  }
+}
