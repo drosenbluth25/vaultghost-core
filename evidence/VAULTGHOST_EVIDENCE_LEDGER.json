@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "generated_utc": "2026-06-18T23:43:00Z",
+  "generated_by": "VaultGhost Self-Audit Packet — Phase 0 Evidence Freeze",
+  "artifacts": [
+    {
+      "artifact_id": "VG-ART-001",
+      "artifact_type": "github_repository",
+      "title": "drosenbluth25/vaultghost-core",
+      "source_class": "self_authored_public_artifact",
+      "verification_status": "publicly_visible",
+      "observed_facts": [
+        "public_repository_exists",
+        "contains_schemas_directory",
+        "contains_tests_directory",
+        "contains_vaultghost_core_directory"
+      ],
+      "allowed_uses": [
+        "proves_public_repository_exists",
+        "proves_public_development_footprint"
+      ],
+      "disallowed_uses": [
+        "proves_external_validation",
+        "proves_production_readiness",
+        "proves_adoption",
+        "proves_legal_protectability"
+      ],
+      "notes": "Observed publicly via GitHub. Contents and commit count subject to change."
+    },
+    {
+      "artifact_id": "VG-ART-002",
+      "artifact_type": "github_release",
+      "title": "v1.0.0-signing — Adapter-Layer Signing Sprint",
+      "release_date_public": "2026-04-24",
+      "commit_reference": "ff7b252",
+      "source_class": "self_authored_public_artifact",
+      "verification_status": "publicly_visible_release",
+      "observed_facts": [
+        "release_claims_8_of_8_tests_passing",
+        "release_claims_adapter_layer_ed25519_signing_sprint_finalized",
+        "release_claims_three_targeted_fixes_applied"
+      ],
+      "allowed_uses": [
+        "documents_public_release_history",
+        "supports_existence_of_signing_sprint_release",
+        "supports_self_authored_test_pass_claim"
+      ],
+      "disallowed_uses": [
+        "proves_independent_review",
+        "proves_industry_validation",
+        "proves_patentability",
+        "proves_security_assurance"
+      ],
+      "notes": "Release text is self-authored. Test pass claim is unaudited externally."
+    },
+    {
+      "artifact_id": "VG-ART-003",
+      "artifact_type": "provisional_patent_reference",
+      "title": "VaultGhost Provisional Patent Filing Reference",
+      "claimed_date": "2026-02-25",
+      "source_class": "self_authored_public_artifact",
+      "verification_status": "receipt_required_for_primary_verification",
+      "conversion_deadline": "2027-02-25",
+      "allowed_uses": [
+        "documents_public_claim_of_filing_date",
+        "flags_patent_deadline_for_tracking"
+      ],
+      "disallowed_uses": [
+        "proves_uspto_receipt_exists",
+        "proves_patentability",
+        "proves_originality_over_prior_art",
+        "proves_enforceable_rights"
+      ],
+      "upgrade_condition": "Attach actual USPTO filing receipt PDF to evidence/primary_artifacts/patent/ to upgrade to primary_artifact.",
+      "notes": "Reference appears in public GitHub release notes. Receipt not yet attached to this packet."
+    }
+  ]
+}
