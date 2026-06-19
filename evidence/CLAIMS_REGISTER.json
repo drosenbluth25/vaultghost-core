@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "generated_utc": "2026-06-18T23:43:00Z",
+  "rule": "No claim may be stated publicly at a tier above its current evidence classification.",
+  "claims": [
+    {
+      "claim_id": "VG-CLAIM-001",
+      "claim_text": "VaultGhost is a prototype evidence-control protocol for AI output governance.",
+      "evidence_basis": [
+        "VG-ART-001",
+        "VG-ART-002"
+      ],
+      "evidence_tier": "supported_by_self_authored_public_artifacts",
+      "propagation_status": "allowed_with_limits",
+      "safe_wording": "VaultGhost is a prototype evidence-control protocol for AI output governance.",
+      "unsafe_wording": [
+        "industry-validated protocol",
+        "externally adopted standard",
+        "proven legal framework"
+      ]
+    },
+    {
+      "claim_id": "VG-CLAIM-002",
+      "claim_text": "VaultGhost has a U.S. provisional patent application filed February 25, 2026.",
+      "evidence_basis": [
+        "VG-ART-003"
+      ],
+      "evidence_tier": "pending_primary_receipt",
+      "propagation_status": "hold_until_receipt_attached",
+      "safe_wording": "I maintain a record indicating a February 25, 2026 provisional filing; USPTO receipt attachment pending.",
+      "unsafe_wording": [
+        "patent-protected",
+        "patented",
+        "enforceable patent rights",
+        "proven priority against all prior art"
+      ]
+    },
+    {
+      "claim_id": "VG-CLAIM-003",
+      "claim_text": "VaultGhost v1.0.0-signing public release claims 8/8 tests passed.",
+      "evidence_basis": [
+        "VG-ART-002"
+      ],
+      "evidence_tier": "public_self_authored_release",
+      "propagation_status": "allowed_with_source_limit",
+      "safe_wording": "The public release states that 8/8 signing tests passed at commit ff7b252.",
+      "unsafe_wording": [
+        "independently validated",
+        "security audited",
+        "production ready"
+      ]
+    },
+    {
+      "claim_id": "VG-CLAIM-004",
+      "claim_text": "VaultGhost applies its own evidence-gate standard to claims made about itself.",
+      "evidence_basis": [
+        "AI_OUTPUTS_QUARANTINE.json",
+        "CLAIMS_REGISTER.json",
+        "PROPAGATION_RULES.md"
+      ],
+      "evidence_tier": "demonstrated_by_this_packet",
+      "propagation_status": "allowed",
+      "safe_wording": "VaultGhost maintains a self-audit packet that quarantines AI-amplified claims about its own importance, including those from Perplexity, ChatGPT, and other LLMs used in its development.",
+      "unsafe_wording": [
+        "proves the protocol is complete",
+        "proves the protocol is production-ready"
+      ]
+    }
+  ]
+}
