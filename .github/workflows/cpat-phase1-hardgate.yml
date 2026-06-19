@@ -27,23 +27,37 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install dependencies and preserve install log
         run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          mkdir -p evidence/primary_artifacts/test_logs reports
+          python -m pip install --upgrade pip 2>&1 | tee evidence/primary_artifacts/test_logs/pip_install.log
+          if [ -f requirements.txt ]; then
+            set +e
+            pip install -r requirements.txt 2>&1 | tee -a evidence/primary_artifacts/test_logs/pip_install.log
+            echo ${PIPESTATUS[0]} > evidence/primary_artifacts/test_logs/pip_install_exit_code.txt
+            set -e
+          else
+            echo "requirements.txt not found" | tee -a evidence/primary_artifacts/test_logs/pip_install.log
+            echo 0 > evidence/primary_artifacts/test_logs/pip_install_exit_code.txt
+          fi
 
-      - name: Run hard gate
+      - name: Run hard gate and preserve pytest log
         run: |
           mkdir -p evidence/primary_artifacts/test_logs reports
           git rev-parse HEAD | tee evidence/primary_artifacts/test_logs/git_head.txt
           uname -a | tee evidence/primary_artifacts/test_logs/os.txt
           python --version | tee evidence/primary_artifacts/test_logs/python_version.txt
           pip freeze | tee evidence/primary_artifacts/test_logs/pip_freeze.txt
+          set +e
           pytest -q 2>&1 | tee evidence/primary_artifacts/test_logs/pytest_run.log
+          echo ${PIPESTATUS[0]} > evidence/primary_artifacts/test_logs/pytest_exit_code.txt
+          set -e
 
       - name: Hash evidence
         if: always()
         run: |
+          mkdir -p evidence/primary_artifacts/test_logs
+          touch evidence/primary_artifacts/test_logs/pytest_run.log
           sha256sum evidence/primary_artifacts/test_logs/pytest_run.log | tee evidence/primary_artifacts/test_logs/pytest_run.sha256
           find . -type f -not -path './.git/*' -not -path './.venv/*' -not -path './venv/*' -print0 | sort -z | xargs -0 sha256sum > evidence/primary_artifacts/test_logs/file_manifest.sha256
 
@@ -55,3 +69,9 @@ jobs:
           path: |
             evidence/primary_artifacts/test_logs/
             reports/VAULTGHOST_REPRODUCIBILITY_REPORT_TEMPLATE.md
+
+      - name: Finalize hard-gate result
+        run: |
+          PYTEST_EXIT=$(cat evidence/primary_artifacts/test_logs/pytest_exit_code.txt)
+          echo "pytest_exit_code=$PYTEST_EXIT"
+          exit "$PYTEST_EXIT"
