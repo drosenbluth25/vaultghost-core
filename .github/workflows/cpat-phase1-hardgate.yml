@@ -1,0 +1,57 @@
+name: CPAT Phase 1 Hard Gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cpat-phase1-hardgate.yml'
+      - 'evidence/**'
+      - 'reports/**'
+      - 'tests/**'
+      - 'vaultghost_core/**'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  hardgate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run hard gate
+        run: |
+          mkdir -p evidence/primary_artifacts/test_logs reports
+          git rev-parse HEAD | tee evidence/primary_artifacts/test_logs/git_head.txt
+          uname -a | tee evidence/primary_artifacts/test_logs/os.txt
+          python --version | tee evidence/primary_artifacts/test_logs/python_version.txt
+          pip freeze | tee evidence/primary_artifacts/test_logs/pip_freeze.txt
+          pytest -q 2>&1 | tee evidence/primary_artifacts/test_logs/pytest_run.log
+
+      - name: Hash evidence
+        if: always()
+        run: |
+          sha256sum evidence/primary_artifacts/test_logs/pytest_run.log | tee evidence/primary_artifacts/test_logs/pytest_run.sha256
+          find . -type f -not -path './.git/*' -not -path './.venv/*' -not -path './venv/*' -print0 | sort -z | xargs -0 sha256sum > evidence/primary_artifacts/test_logs/file_manifest.sha256
+
+      - name: Upload hard-gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpat-phase1-hardgate-evidence
+          path: |
+            evidence/primary_artifacts/test_logs/
+            reports/VAULTGHOST_REPRODUCIBILITY_REPORT_TEMPLATE.md
