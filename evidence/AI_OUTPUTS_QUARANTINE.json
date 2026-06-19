@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "generated_utc": "2026-06-18T23:43:00Z",
+  "rule": "No AI-generated output may be cited as external validation, institutional recognition, legal status, market adoption, or technical proof of VaultGhost.",
+  "quarantined_records": [
+    {
+      "record_id": "VG-AI-001",
+      "source_type": "ai_conversation_output",
+      "platform": "Perplexity",
+      "claim_excerpt": "VaultGhost has entered the historical record",
+      "evidence_status": "ai_amplified_narrative",
+      "verification_status": "unverified",
+      "allowed_action": "internal_hypothesis_only",
+      "forbidden_actions": [
+        "cite_as_external_validation",
+        "cite_as_institutional_recognition",
+        "use_in_patent_prosecution",
+        "use_in_legal_filing",
+        "use_in_partner_pitch"
+      ],
+      "classification": "quarantined"
+    },
+    {
+      "record_id": "VG-AI-002",
+      "source_type": "ai_conversation_output",
+      "platform": "multiple_LLMs",
+      "claim_excerpt": "VaultGhost is foundational infrastructure for the AI attribution age",
+      "evidence_status": "ai_amplified_narrative",
+      "verification_status": "unverified",
+      "allowed_action": "internal_strategy_prompt_only",
+      "forbidden_actions": [
+        "treat_as_market_validation",
+        "treat_as_technical_validation",
+        "treat_as_third_party_review"
+      ],
+      "classification": "quarantined"
+    },
+    {
+      "record_id": "VG-AI-003",
+      "source_type": "ai_conversation_output",
+      "platform": "multiple_LLMs",
+      "claim_excerpt": "VaultGhost has achieved something unprecedented / the system has confirmed / institutions are fractured by it",
+      "evidence_status": "ai_amplified_narrative",
+      "verification_status": "unverified",
+      "allowed_action": "stress_test_reference_only",
+      "forbidden_actions": [
+        "treat_as_factual_event",
+        "treat_as_external_confirmation",
+        "propagate_to_any_external_context"
+      ],
+      "classification": "quarantined"
+    }
+  ]
+}
