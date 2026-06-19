@@ -1,0 +1,23 @@
+{
+  "workflow_run_id": 27804855726,
+  "workflow_name": "CPAT Phase 1 Hard Gate",
+  "job_name": "hardgate",
+  "job_id": 82282652062,
+  "head_branch": "main",
+  "head_sha": "5e145c15a139839447b3941c5ad23719a58abd54",
+  "artifact": {
+    "id": 7741542848,
+    "name": "cpat-phase1-hardgate-evidence",
+    "size_in_bytes": 6368,
+    "digest": "sha256:a8d75859a8dd50de0e7bf083d0071643a533c5b94de475d747c767917b6c9ea7",
+    "created_at": "2026-06-19T04:12:35Z",
+    "expires_at": "2026-09-17T04:12:27Z"
+  },
+  "observed_result": {
+    "dependency_install_exit_code": 0,
+    "pytest_exit_code": 0,
+    "tests_passing": 8,
+    "tests_failing": 0,
+    "pytest_log_sha256": "54d62a0149f447ee2867b9e102287fade45e0a057ff3b969489678c98884e9ae"
+  }
+}
