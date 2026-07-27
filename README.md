@@ -2,13 +2,13 @@
 
 ## Status
 
-**Candidate core implementation; not independently validated and not production-ready.**
+**Candidate core implementation with a passing GitHub-hosted CI baseline; not independently human-validated and not production-ready.**
 
 This repository contains implementation work associated with VaultGhost canonicalization, schema validation, Ed25519 signing/verification, deterministic fixtures, and evidence-control artifacts. It is a candidate implementation component of the wider VaultGhost repository ecosystem. The repository does not by itself establish legal ownership, factual truth, external adoption, patentability, or end-to-end interoperability with every related repository.
 
 ## Scope
 
-VaultGhost Core is intended to support bounded technical operations such as:
+VaultGhost Core supports bounded technical operations such as:
 
 - canonical serialization of defined payloads;
 - schema validation;
@@ -31,14 +31,12 @@ A valid signature proves only that the signed bytes verify under the supplied ke
 ## Relationship to Other Repositories
 
 - `drosenbluth25/vaultghost-protocol`: claimed canonical specification candidate; specification-to-code correspondence remains under Gate 0 review.
-- `drosenbluth25/vaultghost-verify`: minimal deterministic run-manifest verification utility.
+- `drosenbluth25/vaultghost-verify`: minimal deterministic run-manifest verification utility; its corrected baseline has passed GitHub-hosted CI.
 - `drosenbluth25/vaultghost-chain-ledger`: artifact and hash-index consistency component.
 
-No cross-repository release should be treated as authoritative until exact commit SHAs are pinned in a reviewed release manifest.
+No cross-repository release should be treated as authoritative until exact commit SHAs are pinned in a reviewed release manifest and interface correspondence is demonstrated.
 
 ## Requirements
-
-Observed dependency requirements include:
 
 ```text
 rfc8785==0.1.4
@@ -49,10 +47,6 @@ cryptography>=42.0.0
 
 ## Installation
 
-From a fresh clone, create an isolated Python environment and install the pinned or declared dependencies used by the checked-out commit. The exact package installation command still requires maintainer confirmation because this repository does not yet expose a single reviewed installation contract.
-
-Example development setup:
-
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
@@ -62,20 +56,30 @@ python -m pip install -r requirements.txt
 
 ## Verification and Tests
 
-Commit history records targeted signing tests and broader evidence-capture workflows. One historically recorded command is:
+Run the complete included suite:
 
 ```bash
-pytest -v tests/test_signing.py
+python -m pytest -q
 ```
 
-Do not interpret this README as proof that the command currently passes on every supported environment. Before release designation, a reviewer must record:
+Exercise the CLI:
 
-- checked-out commit SHA;
-- operating system and Python version;
-- dependency resolution output;
-- exact commands;
-- stdout, stderr, and exit codes;
-- test and fixture hashes.
+```bash
+python -m vaultghost_core.cli --help
+python -m vaultghost_core.cli keygen --private-out sk.bin --public-out pk.bin
+```
+
+A GitHub-hosted Ubuntu baseline completed successfully on July 27, 2026:
+
+- dependency installation: PASS;
+- full suite: `8 passed in 0.14s`;
+- CLI help: PASS;
+- Ed25519 key generation smoke test: PASS;
+- workflow run: `30283272571`;
+- evidence artifact: `8659705260`;
+- artifact digest: `sha256:11891fc5452d368e72019dda69474dd45d3b9d0f983e45fc0ce680ae1df36877`.
+
+See `gate-0/CORE_BASELINE_RESULT_CI.json` for the bounded evidence record.
 
 ## Security Boundary
 
@@ -90,12 +94,11 @@ The implementation may validate structural, cryptographic, and deterministic con
 
 ## Current Gate 0 Blockers
 
-1. Confirm the authoritative installation and full-suite test commands.
-2. Inventory normative schemas, fixtures, and CLI entry points.
-3. Map implementation behavior to the canonical specification candidate.
-4. Pin this repository commit in a cross-repository release manifest.
-5. Complete a fresh-clone reproduction by an independent human reviewer.
-6. Resolve critical findings before a production-readiness claim.
+1. Map implementation behavior to the canonical specification candidate.
+2. Demonstrate interface and fixture correspondence with `vaultghost-verify` and `vaultghost-chain-ledger`.
+3. Pin a tested cross-repository commit set in a release manifest.
+4. Complete an independent human reproduction for Gate 3.
+5. Resolve critical findings before a production-readiness claim.
 
 ## Reporting Findings
 
