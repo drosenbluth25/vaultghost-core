@@ -3,6 +3,7 @@ name: Gate 0 Core Baseline
 on:
   push:
     branches:
+      - main
       - docs/core-reviewer-readme
   pull_request:
     branches:
