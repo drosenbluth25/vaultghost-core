@@ -1,8 +1,19 @@
 {
   "repository": "drosenbluth25/vaultghost-core",
-  "branch": "docs/core-reviewer-readme",
-  "status": "CI_PENDING",
+  "canonical_candidate_commit": "d1cfa653ca64dbd59e8406ffdf87042dcc9484ec",
+  "tested_pull_request_merge_commit": "0646d50df53ceb32f914687e0dad5dc6e3643eb0",
+  "workflow_run_id": 30283272571,
+  "job_id": 90034685027,
+  "artifact_id": 8659705260,
+  "artifact_digest": "sha256:11891fc5452d368e72019dda69474dd45d3b9d0f983e45fc0ce680ae1df36877",
+  "status": "PASS_CI",
   "baseline_command": "python -m pytest -q",
-  "cli_smoke": "python -m vaultghost_core.cli --help && python -m vaultghost_core.cli keygen",
+  "test_result": "8 passed in 0.14s",
+  "cli_smoke": {
+    "help": "PASS",
+    "keygen": "PASS"
+  },
+  "classification": "CI_REPRODUCED_NOT_INDEPENDENT_HUMAN_REVIEW",
+  "cross_repository_correspondence": "NOT_ESTABLISHED",
   "release_authorized": false
 }
