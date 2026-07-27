@@ -1,0 +1,60 @@
+{
+  "result_version": "1.0",
+  "classification": "CI_REPRODUCED_NOT_INDEPENDENT_HUMAN_REVIEW",
+  "execution_date_utc": "2026-07-27T16:07:40Z",
+  "repository": "drosenbluth25/vaultghost-core",
+  "canonical_candidate_commit": "d1cfa653ca64dbd59e8406ffdf87042dcc9484ec",
+  "tested_pull_request_merge_commit": "0646d50df53ceb32f914687e0dad5dc6e3643eb0",
+  "workflow_run_id": 30283272571,
+  "job_id": 90034685027,
+  "environment": {
+    "runner_os": "Ubuntu",
+    "kernel": "Linux 6.17.0-1020-azure",
+    "architecture": "x86_64",
+    "python": "3.12.13"
+  },
+  "commands": [
+    {
+      "command": "python -m pip install -r requirements.txt",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "python -m pytest -q",
+      "exit_code": 0,
+      "result": "PASS",
+      "tests": "8 passed in 0.14s"
+    },
+    {
+      "command": "python -m vaultghost_core.cli --help",
+      "exit_code": 0,
+      "result": "PASS",
+      "observed_commands": ["keygen", "turn-sign", "turn-verify"]
+    },
+    {
+      "command": "python -m vaultghost_core.cli keygen --private-out gate0-core-logs/sk.bin --public-out gate0-core-logs/pk.bin",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "artifact": {
+    "github_artifact_id": 8659705260,
+    "name": "gate0-core-baseline-0646d50df53ceb32f914687e0dad5dc6e3643eb0",
+    "digest": "sha256:11891fc5452d368e72019dda69474dd45d3b9d0f983e45fc0ce680ae1df36877",
+    "expires_at": "2026-10-25T16:07:35Z"
+  },
+  "log_hashes": {
+    "environment-and-files.txt": "3f8fff10b354ae226d6188627d95149421a3a7fccec15ab9a516abfc67e680bb",
+    "install.log": "bc98b75c791ffed78a93a276f4e66c6413ba4a7da829efdecbe257a31108cb87",
+    "test.log": "253b5cef82a41f8f53519eb9c6e6ef1930bc1b66748d4d51bb12aa8bfcf084d2",
+    "cli-help.log": "272cd3d868f897db34067802ead2394af221a5bb6c82785dc335789d771357c3",
+    "keygen.log": "12b47949b00e37f17f8eff365cc96108e0954fe3a4490bf5d048f780533c33be"
+  },
+  "limitations": [
+    "This is a GitHub-hosted CI reproduction, not an independent human review.",
+    "The run validates this repository's included tests and CLI smoke path only.",
+    "Cross-repository specification, verifier, and ledger correspondence was not established by this run.",
+    "Passing tests does not establish factual truth, legal ownership, novelty, or production readiness."
+  ],
+  "release_authorized": false
+}
