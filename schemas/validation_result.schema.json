@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Validation Result",
+  "description": "Schema for the result of a validation process.",
+  "type": "object",
+  "required": [
+    "is_valid",
+    "messages"
+  ],
+  "properties": {
+    "is_valid": {
+      "type": "boolean",
+      "description": "Indicates if the validation was successful."
+    },
+    "messages": {
+      "type": "array",
+      "description": "A list of validation messages (errors, warnings, info).",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["error", "warning", "info"],
+            "description": "Type of the validation message."
+          },
+          "text": {
+            "type": "string",
+            "description": "The validation message content."
+          },
+          "code": {
+            "type": "string",
+            "description": "Optional error code."
+          },
+          "path": {
+            "type": "string",
+            "description": "Optional JSON path to the problematic field."
+          }
+        }
+      }
+    }
+  }
+}
