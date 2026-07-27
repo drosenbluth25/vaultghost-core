@@ -1,0 +1,8 @@
+{
+  "repository": "drosenbluth25/vaultghost-core",
+  "branch": "docs/core-reviewer-readme",
+  "status": "CI_PENDING",
+  "baseline_command": "python -m pytest -q",
+  "cli_smoke": "python -m vaultghost_core.cli --help && python -m vaultghost_core.cli keygen",
+  "release_authorized": false
+}
