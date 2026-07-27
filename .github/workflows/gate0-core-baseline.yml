@@ -1,0 +1,76 @@
+name: Gate 0 Core Baseline
+
+on:
+  push:
+    branches:
+      - docs/core-reviewer-readme
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch commit
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Capture environment and inventory
+        run: |
+          mkdir -p gate0-core-logs
+          {
+            echo "date_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "repository=${GITHUB_REPOSITORY}"
+            echo "commit=${GITHUB_SHA}"
+            uname -a
+            python --version
+            git ls-files
+          } | tee gate0-core-logs/environment-and-files.txt
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m pip install --upgrade pip 2>&1 | tee gate0-core-logs/pip-upgrade.log
+          python -m pip install -r requirements.txt 2>&1 | tee gate0-core-logs/install.log
+          echo ${PIPESTATUS[0]} > gate0-core-logs/install.exit
+
+      - name: Run full test suite
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m pytest -q 2>&1 | tee gate0-core-logs/test.log
+          echo ${PIPESTATUS[0]} > gate0-core-logs/test.exit
+
+      - name: Exercise CLI help and key generation
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m vaultghost_core.cli --help 2>&1 | tee gate0-core-logs/cli-help.log
+          python -m vaultghost_core.cli keygen --private-out gate0-core-logs/sk.bin --public-out gate0-core-logs/pk.bin 2>&1 | tee gate0-core-logs/keygen.log
+          test -s gate0-core-logs/sk.bin
+          test -s gate0-core-logs/pk.bin
+
+      - name: Record repository status and hashes
+        if: always()
+        run: |
+          git status --short | tee gate0-core-logs/git-status.txt
+          sha256sum gate0-core-logs/* | tee gate0-core-logs/SHA256SUMS.txt
+
+      - name: Upload baseline evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate0-core-baseline-${{ github.sha }}
+          path: gate0-core-logs/
+          if-no-files-found: error
+          retention-days: 90
